@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/display-custom-field-values",
+  "version": "0.1.0",
+  "title": "Display Custom Field Values",
+  "category": "block-kuy",
+  "icon": "text",
+  "description": "Display list of custom fields created",
+  "example": {},
+  "supports": {
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true,
+      "style": true
+    },
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "html": false,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": ""
+    },
+    "customField": {
+      "type": "string",
+      "default": ""
+    },
+    "itemPosition": {
+      "type": "boolean",
+      "default": false
+    },
+    "itemBackgroundColor": {
+      "type": "string"
+    },
+    "itemPaddingBlock": {
+      "type": "string",
+      "default": "8px"
+    },
+    "itemPaddingInline": {
+      "type": "string",
+      "default": "8px"
+    },
+    "itemSpacing": {
+      "type": "string",
+      "default": "8px"
+    },
+    "itemBorderRadius": {
+      "type": "string",
+      "default": "8px"
+    }
+  },
+  "textdomain": "display-custom-field-values",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}
