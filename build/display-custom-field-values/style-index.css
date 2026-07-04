@@ -1,1 +1,18 @@
-.fun-blocks__display-custom-field__container{display:flex}.fun-blocks__display-custom-field__item{margin-block:0;width:fit-content}
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/display-custom-field-values/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.fun-blocks__display-custom-field__container {
+  display: flex;
+}
+.fun-blocks__display-custom-field__item {
+  margin-block: 0px;
+  width: fit-content;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

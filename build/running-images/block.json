@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/running-images",
+  "version": "0.1.0",
+  "title": "Running Images",
+  "category": "block-kuy",
+  "icon": "images-alt2",
+  "description": "A block where you can add images and they will move infinitely.",
+  "example": {},
+  "supports": {
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true,
+      "style": true
+    },
+    "color": {
+      "background": true,
+      "gradients": true,
+      "text": false
+    },
+    "html": false,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": false
+    }
+  },
+  "attributes": {
+    "imageAspectRatio": {
+      "type": "string",
+      "default": "4/3"
+    },
+    "imageObjectFit": {
+      "type": "boolean",
+      "default": false
+    },
+    "imageMaxHeight": {
+      "type": "string",
+      "default": "200px"
+    },
+    "imageBorderWidth": {
+      "type": "string",
+      "default": "0px"
+    },
+    "imageBorderColor": {
+      "type": "string"
+    },
+    "imageBorderRadius": {
+      "type": "string",
+      "default": "0px"
+    },
+    "imagePaddingBlock": {
+      "type": "string",
+      "default": "0px"
+    },
+    "imagePaddingInline": {
+      "type": "string",
+      "default": "0px"
+    },
+    "columnGap": {
+      "type": "string",
+      "default": "0px"
+    },
+    "images": {
+      "type": "array",
+      "default": []
+    },
+    "animationDuration": {
+      "type": "string",
+      "default": "6000ms"
+    }
+  },
+  "textdomain": "running-images",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

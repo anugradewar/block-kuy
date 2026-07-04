@@ -1,0 +1,46 @@
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/running-images/style.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-running-images {
+  display: flex;
+  gap: var(--column-gap);
+  list-style-type: none;
+  max-width: 100%;
+  overflow: hidden;
+}
+.wp-block-create-block-running-images__track {
+  animation: scroll-horizontal var(--animation-duration) linear 0s infinite;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--column-gap);
+  padding-inline-start: 0px;
+}
+@keyframes scroll-horizontal {
+  to {
+    transform: translateX(calc(-100% - var(--column-gap)));
+  }
+}
+.wp-block-create-block-running-images.is-image-contained .wp-block-create-block-running-images__img {
+  object-fit: contain;
+}
+.wp-block-create-block-running-images__list {
+  border: solid var(--border-image-width) var(--border-image-color);
+  border-radius: var(--border-image-radius);
+  max-height: var(--max-height);
+  padding-block: var(--image-padding-block);
+  padding-inline: var(--image-padding-inline);
+}
+.wp-block-create-block-running-images__img {
+  aspect-ratio: var(--aspect-ratio);
+  border-radius: var(--border-image-radius);
+  max-height: var(--max-height);
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

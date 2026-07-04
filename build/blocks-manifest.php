@@ -154,6 +154,90 @@ return array(
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
 	),
+	'running-images' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/running-images',
+		'version' => '0.1.0',
+		'title' => 'Running Images',
+		'category' => 'block-kuy',
+		'icon' => 'images-alt2',
+		'description' => 'A block where you can add images and they will move infinitely.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'__experimentalBorder' => array(
+				'color' => true,
+				'radius' => true,
+				'width' => true,
+				'style' => true
+			),
+			'color' => array(
+				'background' => true,
+				'gradients' => true,
+				'text' => false
+			),
+			'html' => false,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true,
+				'blockGap' => false
+			)
+		),
+		'attributes' => array(
+			'imageAspectRatio' => array(
+				'type' => 'string',
+				'default' => '4/3'
+			),
+			'imageObjectFit' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'imageMaxHeight' => array(
+				'type' => 'string',
+				'default' => '200px'
+			),
+			'imageBorderWidth' => array(
+				'type' => 'string',
+				'default' => '0px'
+			),
+			'imageBorderColor' => array(
+				'type' => 'string'
+			),
+			'imageBorderRadius' => array(
+				'type' => 'string',
+				'default' => '0px'
+			),
+			'imagePaddingBlock' => array(
+				'type' => 'string',
+				'default' => '0px'
+			),
+			'imagePaddingInline' => array(
+				'type' => 'string',
+				'default' => '0px'
+			),
+			'columnGap' => array(
+				'type' => 'string',
+				'default' => '0px'
+			),
+			'images' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'animationDuration' => array(
+				'type' => 'string',
+				'default' => '6000ms'
+			)
+		),
+		'textdomain' => 'running-images',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js'
+	),
 	'twinkling-text' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

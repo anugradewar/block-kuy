@@ -2,9 +2,9 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/twinkling-text/edit.js"
+/***/ "./src/running-images/edit.js"
 /*!************************************!*\
-  !*** ./src/twinkling-text/edit.js ***!
+  !*** ./src/running-images/edit.js ***!
   \************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/twinkling-text/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/running-images/editor.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -30,104 +30,192 @@ function Edit({
   attributes,
   setAttributes
 }) {
-  const {
-    columnGap,
-    dotColor,
-    dotSize,
-    justifyContent,
-    text
-  } = attributes;
+  const [colors] = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useSettings)("color.palette");
+  const images = attributes.images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+    className: "wp-block-create-block-running-images__list",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      className: "wp-block-create-block-running-images__img",
+      src: image.url,
+      alt: image.alt
+    })
+  }, image.id));
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-    className: `twinkling-text ${justifyContent}`,
+    className: attributes.imageObjectFit ? "is-image-contained" : "",
     style: {
-      "--column-gap": columnGap,
-      "--dot-color": dotColor,
-      "--dot-size": dotSize
+      "--animation-duration": attributes.animationDuration,
+      "--aspect-ratio": attributes.imageAspectRatio,
+      "--border-image-color": attributes.imageBorderColor,
+      "--border-image-width": attributes.imageBorderWidth,
+      "--border-image-radius": attributes.imageBorderRadius,
+      "--column-gap": attributes.columnGap,
+      "--max-height": attributes.imageMaxHeight,
+      "--image-padding-block": attributes.imagePaddingBlock,
+      "--image-padding-inline": attributes.imagePaddingInline
     }
   });
-  const [colors] = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useSettings)("color.palette");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: "Settings",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-          label: "Text",
-          value: text || "",
-          onChange: value => setAttributes({
-            text: value
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Settings", "running-images"),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Please set your images", "running-images"),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Select Images", "running-images"),
+            allowedTypes: ["image"],
+            multiple: "add",
+            gallery: true,
+            addToGallery: true,
+            value: attributes.images.map(({
+              id
+            }) => id),
+            onSelect: images => setAttributes({
+              images: images.map(image => ({
+                id: image.id,
+                url: image.url,
+                alt: image.alt
+              }))
+            }),
+            render: ({
+              open
+            }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+              variant: "secondary",
+              onClick: open,
+              children: "Set Images"
+            })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-          label: "Position",
-          value: justifyContent,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Aspect Ratio", "running-images"),
+          value: attributes.imageAspectRatio,
           options: [{
-            label: "Left",
-            value: "left-aligned"
+            label: "Landscape (16:9)",
+            value: "16/9"
           }, {
-            label: "Center",
-            value: "center-aligned"
+            label: "Landscape (3:2)",
+            value: "3/2"
           }, {
-            label: "Right",
-            value: "right-aligned"
+            label: "Landscape (4:3)",
+            value: "4/3"
+          }, {
+            label: "Square",
+            value: "1/1"
+          }, {
+            label: "Portrait (3:4)",
+            value: "3/4"
+          }, {
+            label: "Portrait (2:3)",
+            value: "2/3"
+          }, {
+            label: "Portrait (9:16)",
+            value: "9/16"
           }],
           onChange: value => setAttributes({
-            justifyContent: value
+            imageAspectRatio: value
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          label: "Dot Size",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
-            value: dotSize,
-            onChange: value => setAttributes({
-              dotSize: value
-            })
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Object Fit", "running-images"),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Contain"),
+            help: attributes.imageObjectFit ? "The images will be displayed inside the space" : "The images will be displayed covering all of the space",
+            checked: attributes.imageObjectFit,
+            onChange: imageObjectFit => {
+              setAttributes({
+                imageObjectFit
+              });
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Max Height", "running-images"),
+          value: attributes.imageMaxHeight,
+          onChange: value => setAttributes({
+            imageMaxHeight: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Border Width", "running-images"),
+          value: attributes.imageBorderWidth,
+          onChange: value => setAttributes({
+            imageBorderWidth: value
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          label: "Dot Color",
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Border Color", "running-images"),
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
             colors: colors,
-            value: dotColor,
+            value: attributes.imageBorderColor,
             onChange: color => setAttributes({
-              dotColor: color
+              imageBorderColor: color
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-          label: "Column Gap",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
-            value: columnGap,
-            onChange: value => setAttributes({
-              columnGap: value
-            })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Border Radius", "running-images"),
+          value: attributes.imageBorderRadius,
+          onChange: value => setAttributes({
+            imageBorderRadius: value
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Padding Block", "running-images"),
+          value: attributes.imagePaddingBlock,
+          onChange: value => setAttributes({
+            imagePaddingBlock: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Padding Inline", "running-images"),
+          value: attributes.imagePaddingInline,
+          onChange: value => setAttributes({
+            imagePaddingInline: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Image Gap", "running-images"),
+          value: attributes.columnGap,
+          onChange: value => setAttributes({
+            columnGap: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalUnitControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Animation Duration", "running-images"),
+          value: attributes.animationDuration,
+          onChange: value => setAttributes({
+            animationDuration: value
+          }),
+          units: [{
+            value: "ms",
+            label: "ms"
+          }, {
+            value: "s",
+            label: "s"
+          }]
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "twinkling-text-container",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        ...blockProps,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-          className: "dot"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-          children: [" ", text, " "]
-        })]
+    }), attributes.images.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      ...blockProps,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: "Please select your images."
       })
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "wp-block-create-block-running-images__track",
+        children: images
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "wp-block-create-block-running-images__track",
+        children: images
+      })]
     })]
   });
 }
 
 /***/ },
 
-/***/ "./src/twinkling-text/index.js"
+/***/ "./src/running-images/index.js"
 /*!*************************************!*\
-  !*** ./src/twinkling-text/index.js ***!
+  !*** ./src/running-images/index.js ***!
   \*************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/twinkling-text/style.scss");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/twinkling-text/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/twinkling-text/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/twinkling-text/block.json");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/running-images/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/running-images/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/running-images/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/running-images/block.json");
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -169,9 +257,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ },
 
-/***/ "./src/twinkling-text/save.js"
+/***/ "./src/running-images/save.js"
 /*!************************************!*\
-  !*** ./src/twinkling-text/save.js ***!
+  !*** ./src/running-images/save.js ***!
   \************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -188,39 +276,45 @@ __webpack_require__.r(__webpack_exports__);
 function save({
   attributes
 }) {
-  const {
-    justifyContent,
-    text,
-    dotColor,
-    dotSize,
-    columnGap
-  } = attributes;
+  const images = attributes.images.map(image => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+    className: "wp-block-create-block-running-images__list",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+      className: "wp-block-create-block-running-images__img",
+      src: image.url,
+      alt: image.alt
+    })
+  }, image.id));
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
-    className: `twinkling-text ${justifyContent}`,
+    className: attributes.imageObjectFit ? "is-image-contained" : "",
     style: {
-      "--column-gap": columnGap,
-      "--dot-color": dotColor,
-      "--dot-size": dotSize
+      "--animation-duration": attributes.animationDuration,
+      "--aspect-ratio": attributes.imageAspectRatio,
+      "--border-image-color": attributes.imageBorderColor,
+      "--border-image-width": attributes.imageBorderWidth,
+      "--border-image-radius": attributes.imageBorderRadius,
+      "--column-gap": attributes.columnGap,
+      "--max-height": attributes.imageMaxHeight,
+      "--image-padding-block": attributes.imagePaddingBlock,
+      "--image-padding-inline": attributes.imagePaddingInline
     }
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "twinkling-text-container",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      ...blockProps,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-        className: "dot"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
-        children: [" ", text, " "]
-      })]
-    })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    ...blockProps,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "wp-block-create-block-running-images__track",
+      children: images
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "wp-block-create-block-running-images__track",
+      children: images
+    })]
   });
 }
 
 /***/ },
 
-/***/ "./src/twinkling-text/editor.scss"
+/***/ "./src/running-images/editor.scss"
 /*!****************************************!*\
-  !*** ./src/twinkling-text/editor.scss ***!
+  !*** ./src/running-images/editor.scss ***!
   \****************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -230,9 +324,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ },
 
-/***/ "./src/twinkling-text/style.scss"
+/***/ "./src/running-images/style.scss"
 /*!***************************************!*\
-  !*** ./src/twinkling-text/style.scss ***!
+  !*** ./src/running-images/style.scss ***!
   \***************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -292,13 +386,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ },
 
-/***/ "./src/twinkling-text/block.json"
+/***/ "./src/running-images/block.json"
 /*!***************************************!*\
-  !*** ./src/twinkling-text/block.json ***!
+  !*** ./src/running-images/block.json ***!
   \***************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/twinkling-text","version":"0.1.0","title":"Twinkling Text","category":"block-kuy","icon":"marker","description":"Create a twinkling point beside the text.","example":{},"supports":{"__experimentalBorder":{"color":true,"radius":true,"width":true,"style":true},"html":false,"color":{"background":true,"gradients":true,"text":true},"spacing":{"margin":true,"padding":true,"blockGap":false},"typography":{"fontSize":true}},"attributes":{"alignment":{"type":"string","default":"left"},"columnGap":{"type":"string","default":"8px"},"dotColor":{"type":"string","default":"#000"},"dotSize":{"type":"string","default":"8px"},"justifyContent":{"type":"string","default":"left-aligned"},"text":{"type":"string","default":"Your Text"}},"textdomain":"twinkling-text","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/running-images","version":"0.1.0","title":"Running Images","category":"block-kuy","icon":"images-alt2","description":"A block where you can add images and they will move infinitely.","example":{},"supports":{"__experimentalBorder":{"color":true,"radius":true,"width":true,"style":true},"color":{"background":true,"gradients":true,"text":false},"html":false,"spacing":{"margin":true,"padding":true,"blockGap":false}},"attributes":{"imageAspectRatio":{"type":"string","default":"4/3"},"imageObjectFit":{"type":"boolean","default":false},"imageMaxHeight":{"type":"string","default":"200px"},"imageBorderWidth":{"type":"string","default":"0px"},"imageBorderColor":{"type":"string"},"imageBorderRadius":{"type":"string","default":"0px"},"imagePaddingBlock":{"type":"string","default":"0px"},"imagePaddingInline":{"type":"string","default":"0px"},"columnGap":{"type":"string","default":"0px"},"images":{"type":"array","default":[]},"animationDuration":{"type":"string","default":"6000ms"}},"textdomain":"running-images","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ }
 
@@ -433,8 +527,8 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		const installedChunks = {
-/******/ 			"twinkling-text/index": 0,
-/******/ 			"twinkling-text/style-index": 0
+/******/ 			"running-images/index": 0,
+/******/ 			"running-images/style-index": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -484,7 +578,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	let __webpack_exports__ = __webpack_require__.O(undefined, ["twinkling-text/style-index"], () => (__webpack_require__("./src/twinkling-text/index.js")))
+/******/ 	let __webpack_exports__ = __webpack_require__.O(undefined, ["running-images/style-index"], () => (__webpack_require__("./src/running-images/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

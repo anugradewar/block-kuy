@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Block Kuy
- * Description:       Example block scaffolded with Create Block tool.
+ * Description:       A plugin contains of blocks to make your WordPress website more engaging.
  * Version:           0.1.0
  * Requires at least: 6.8
  * Requires PHP:      7.4
@@ -60,7 +60,7 @@ add_filter( 'block_categories_all', 'block_kuy_creates_categories', 10, 2 );
  */
 function block_kuy_register_new_api() {
 	register_rest_route(
-		'vrda/v1',
+		'block-kuy/v1',
 		'/custom-fields/(?P<post_type>[a-zA-Z0-9-]+)',
 		array(
 			array(
