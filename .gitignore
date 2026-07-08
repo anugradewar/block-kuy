@@ -11,11 +11,14 @@ coverage
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 src/
+vendor/
 
 # Dependency directories
 node_modules/
 package-lock.json
 package.json
+composer.json
+composer.lock
 
 # Optional npm cache directory
 .npm

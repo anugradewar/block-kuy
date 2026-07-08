@@ -4,7 +4,7 @@ return array(
 	'display-custom-field-values' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'create-block/display-custom-field-values',
+		'name' => 'create-block/display-custom-field-values-old',
 		'version' => '0.1.0',
 		'title' => 'Display Custom Field Values',
 		'category' => 'block-kuy',
