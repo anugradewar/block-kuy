@@ -37,16 +37,11 @@ add_action( 'init', 'create_block_block_kuy_block_init' );
  * @since 1.0.0
  */
 function block_kuy_creates_categories( $block_categories, $block_editor_context ) {
-	if ( ! empty( $block_editor_context->post ) ) {
-		array_push(
-			$block_categories,
-			array(
-				'slug'  => 'block-kuy',
-				'title' => 'Block Kuy',
-				'icon'  => null,
-			)
-		);
-	}
+	$block_categories[] = array(
+		'slug'  => 'block-kuy',
+		'title' => __( 'Block Kuy', 'block-kuy' ),
+		'icon'  => null,
+	);
 	return $block_categories;
 }
 add_filter( 'block_categories_all', 'block_kuy_creates_categories', 10, 2 );
